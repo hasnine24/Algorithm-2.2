@@ -1,0 +1,1 @@
+{"name":"Local: dijkstra","url":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\dijkstra.cpp","tests":[{"id":1784422060594,"input":"5 8\n0 1 10\n1 2 1\n0 2 7\n0 3 4\n2 3 1\n3 4 5\n1 4 3\n2 4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\dijkstra.cpp","group":"local","local":true}

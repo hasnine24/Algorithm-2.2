@@ -1,0 +1,1 @@
+{"name":"Local: bellman_ford","url":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\bellman_ford.cpp","tests":[{"id":1784423007494,"input":"4 4\n1 2 2\n2 3 -5\n3 1 1\n3 4 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\bellman_ford.cpp","group":"local","local":true}
