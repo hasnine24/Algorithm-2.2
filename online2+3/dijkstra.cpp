@@ -14,8 +14,7 @@ void dijkstra(int src)
 
     while (!pq.empty())
     {
-        pair<int, int> par = pq.top();
-        pq.pop();
+        pair<int, int> par = pq.top();pq.pop();
 
         int par_node = par.second;
         int par_dis = par.first;
@@ -46,13 +45,15 @@ int main()
         cin >> a >> b >> c;
 
         adj_list[a].push_back({b, c});
-        adj_list[b].push_back({a, c});
     }
 
-    memset(parent, -1, sizeof(parent));
+    //memset(parent, -1, sizeof(parent));
 
     for (int i = 0; i < n; i++)
+    {
         dis[i] = INT_MAX;
+        parent[i]=-1;
+    }
 
     dijkstra(0);
 
