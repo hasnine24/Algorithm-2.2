@@ -1,59 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
+vector<pair<int, int>> adj_list[105];
+int dis[105][2];       // dis[node][0] = discount বাকি আছে, dis[node][1] = discount ব্যবহার হয়ে গেছে
+pair<int,int> parent_[105][2]; // parent[node][state] = {parent_node, parent_state}
 
-const ll INF = LLONG_MAX;
-
-vector<pair<int, int>> adj_list[200005];
-ll dis[200005][2];
-
-void dijkstra(int src)
+void dijkstra(int src, int n)
 {
-    priority_queue<pair<ll, pair<int, int>>,vector<pair<ll, pair<int, int>>>,greater<pair<ll, pair<int, int>>>> pq;
+    // pq entry: {cost, {node, state}}
+    priority_queue<pair<int, pair<int,int>>, vector<pair<int, pair<int,int>>>, greater<>> pq;
 
-    dis[src][0] = 0;
     pq.push({0, {src, 0}});
+    dis[src][0] = 0;
 
     while (!pq.empty())
     {
-        pair<ll, pair<int, int>> par = pq.top();
-        pq.pop();
+        auto par = pq.top(); pq.pop();
 
-        ll par_dis = par.first;
-        int par_node = par.second.first;
-        int state = par.second.second;
+        int par_dis   = par.first;
+        int par_node  = par.second.first;
+        int par_state = par.second.second;
 
-        if (par_dis > dis[par_node][state])
-            continue;
+        if (par_dis > dis[par_node][par_state]) continue; // stale entry skip
 
         for (auto child : adj_list[par_node])
         {
             int child_node = child.first;
-            int child_dis = child.second;
+            int child_cost = child.second;
 
-            if (state == 0)
+            // ---- Option 1: discount ব্যবহার না করে যাও (state অপরিবর্তিত থাকবে) ----
+            if (par_dis + child_cost < dis[child_node][par_state])
             {
-                // Discount use না করে
-                if (par_dis + child_dis < dis[child_node][0])
-                {
-                    dis[child_node][0] = par_dis + child_dis;
-                    pq.push({dis[child_node][0], {child_node, 0}});
-                }
-
-                // এই edge-এ discount use করে
-                if (par_dis + child_dis / 2 < dis[child_node][1])
-                {
-                    dis[child_node][1] = par_dis + child_dis / 2;
-                    pq.push({dis[child_node][1], {child_node, 1}});
-                }
+                dis[child_node][par_state] = par_dis + child_cost;
+                parent_[child_node][par_state] = {par_node, par_state};
+                pq.push({dis[child_node][par_state], {child_node, par_state}});
             }
-            else
+
+            // ---- Option 2: এই edge-এ discount ব্যবহার করো (শুধু par_state==0 হলে সম্ভব) ----
+            if (par_state == 0)
             {
-                // Discount already used
-                if (par_dis + child_dis < dis[child_node][1])
+                int half = child_cost / 2;
+                if (par_dis + half < dis[child_node][1])
                 {
-                    dis[child_node][1] = par_dis + child_dis;
+                    dis[child_node][1] = par_dis + half;
+                    parent_[child_node][1] = {par_node, 0};
                     pq.push({dis[child_node][1], {child_node, 1}});
                 }
             }
@@ -63,9 +53,6 @@ void dijkstra(int src)
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
     int n, e;
     cin >> n >> e;
 
@@ -73,20 +60,20 @@ int main()
     {
         int a, b, c;
         cin >> a >> b >> c;
-
-        // Directed Graph
         adj_list[a].push_back({b, c});
     }
 
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i <= n; i++)
     {
-        dis[i][0] = INF;
-        dis[i][1] = INF;
+        dis[i][0] = INT_MAX;
+        dis[i][1] = INT_MAX;
+        parent_[i][0] = {-1, -1};
+        parent_[i][1] = {-1, -1};
     }
 
-    dijkstra(1);
+    dijkstra(1, n); // CSES-এ 1-indexed, city 1 থেকে শুরু
 
-    cout << dis[n][1] << "\n";
-
+    // উত্তর হলো dis[n][1] -> discount ব্যবহার করে city n এ পৌঁছানোর সর্বনিম্ন খরচ
+    cout << "Minimum cost = " << dis[n][1] << "\n";
     return 0;
 }
