@@ -45,7 +45,6 @@ int main()
     {
         int a, b, c;
         cin >> a >> b >> c;
-
         edge_list.push_back(Edge(a, b, c));
         // edge_list.push_back(Edge(b, a, c)); // Undirected
     }
