@@ -1,0 +1,41 @@
+.MODEL SMALL
+.STACK 100H 
+.DATA
+MSG1 DB 13,10,'$'
+.CODE
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    MOV AH,2
+    MOV DL,'?'
+    INT 21H              
+    CALL REVERSE 
+    MOV AH,4CH
+    INT 21H
+MAIN ENDP
+
+REVERSE PROC NEAR
+    XOR CX,CX
+    MOV AH,1
+    INT 21H
+    WHILE_:
+    CMP AL,13
+    JE END_WHILE
+    PUSH AX
+    INC CX
+    INT 21H
+    JMP WHILE_
+    END_WHILE:
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H 
+    MOV AH,2
+    JCXZ EXIT
+    TOP:
+    POP DX
+    INT 21H
+    LOOP TOP
+    EXIT:
+    RET
+REVERSE ENDP 
+END MAIN
