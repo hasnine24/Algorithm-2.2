@@ -1,93 +1,83 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+int par[1005];
+int group_size[1005];
+
+int find(int node)
+{
+    if(par[node] == -1) 
+        return node;
+    int leader = find(par[node]);
+    par[node] = leader;
+    return leader;
+}
+
+void dsu_union(int node1, int node2) 
+{
+    int leader1 = find(node1); 
+    int leader2 = find(node2);   
+    if(group_size[leader1] >= group_size[leader2])
+    {
+        par[leader2] = leader1;
+        group_size[leader1] += group_size[leader2];
+    }
+    else
+    {
+        par[leader1] = leader2;
+        group_size[leader2] += group_size[leader1];
+    }
+}
 
 class Edge
 {
-public:
-    int u, v, w;
-
-    Edge(int u, int v, int w)
-    {
-        this->u = u;
-        this->v = v;
-        this->w = w;
-    }
+    public:
+        int a,b,c;
+        Edge(int a, int b, int c)
+        {
+            this->a = a;
+            this->b = b;
+            this->c = c;
+        }
 };
 
-vector<int> parent;
-
-// Find operation
-int FindSet(int u)
+bool cmp(Edge l, Edge r)
 {
-    if (parent[u] == u)
-        return u;
-
-    return parent[u] = FindSet(parent[u]);
+    return l.c < r.c;
 }
 
-// Union operation
-void Union(int u, int v)
-{
-    u = FindSet(u);
-    v = FindSet(v);
-
-    if (u != v)
-        parent[v] = u;
-}
-bool cmp(Edge l,Edge r)
-{
-    return l.w<r.w;
-}
 int main()
 {
-    int V, E;
-    cin >>V>> E;
-    vector<Edge> edges;
-    for (int i = 0; i < E; i++)
+    //ifstream cin("sparse.txt");
+    ifstream cin("dense.txt");
+
+    int n,e;
+    cin >> n >> e;
+    vector<Edge> edge_list;
+    vector<pair<int,int>> mst;
+
+    memset(par,-1,sizeof(par));
+    memset(group_size,1,sizeof(group_size));
+    
+    while(e--)
     {
-        int u, v, w;cin >> u >> v >> w;
-        edges.push_back(Edge(u, v, w));
+        int a,b,c;
+        cin >> a >> b >> c;
+        edge_list.push_back(Edge(a,b,c));
     }
 
-    // MakeSet(v)
-    parent.resize(V + 1);
+    sort(edge_list.begin(), edge_list.end(),cmp);
 
-    for (int i = 1; i <= V; i++)
+    int totalcost = 0;
+    for(auto ed : edge_list)
     {
-        parent[i] = i;
-    }
-
-    sort(edges.begin(), edges.end(),cmp);
-    vector<Edge> MST;
-    int totalWeight = 0;
-    // Main Kruskal loop
-    for (auto edge : edges)
-    {
-        int u = edge.u;
-        int v = edge.v;
-
-        // FindSet(u) != FindSet(v)
-        if (FindSet(u) != FindSet(v))
+        int parA = find(ed.a);
+        int parB = find(ed.b);
+        if(parA != parB)
         {
-            MST.push_back(edge);
-
-            totalWeight += edge.w;
-            // Union
-            Union(u, v);
+            dsu_union(ed.a, ed.b);
+            mst.push_back({ed.a, ed.b});
+            totalcost += ed.c;
         }
     }
-
-    // Print MST
-    cout << "\nMinimum Spanning Tree:\n";
-
-    for (auto edge : MST)
-    {
-        cout << edge.u << " - "
-             << edge.v << " : "
-             << edge.w << endl;
-    }
-
-    cout << "Total Weight = " << totalWeight << endl;
-
     return 0;
 }
