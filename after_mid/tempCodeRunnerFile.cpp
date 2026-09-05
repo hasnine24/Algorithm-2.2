@@ -1,14 +1,16 @@
-
-        for (auto x : adj[v])
-        {
-            int u = x.first;
-            int w = x.second;
-
-            if (!vis[u] && w < weight[u])
-            {
-                weight[u] = w;
-                par[u] = v;
-
-                pq.push({weight[u], u});
-            }
-        }
+void ForwardElimination()
+// {
+//     double pivot;
+//     for(int i = 0; i < n; i++)
+//     {
+//         for(int j = i + 1; j < n; j++)
+//         {
+//             pivot = a[j][i] / a[i][i];
+//             for(int k = i; k < n; k++)
+//             {
+//                 a[j][k] = a[j][k]- pivot * a[i][k];
+//             }
+//             b[j] = b[j] - pivot * b[i];
+//         }
+//     }
+// }
