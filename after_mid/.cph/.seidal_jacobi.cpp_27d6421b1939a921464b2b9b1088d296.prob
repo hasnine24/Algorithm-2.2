@@ -1,1 +1,0 @@
-{"name":"Local: seidal_jacobi","url":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\after_mid\\seidal_jacobi.cpp","tests":[{"id":1788603448704,"input":"3\n\n10 2 1\n1 5 1\n2 3 10\n\n7\n-8\n6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\after_mid\\seidal_jacobi.cpp","group":"local","local":true}
