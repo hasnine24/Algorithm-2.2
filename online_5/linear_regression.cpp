@@ -39,5 +39,15 @@ int main()
     cout << "a : " << a << " b : " << b << endl;
     cout << "Linear regression equation : y =  " << b << " * x + " << a << endl;
 
+    double errorSum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        double predictedY = a + b * x[i];
+        double error = y[i] - predictedY;
+        errorSum = errorSum + (error * error);
+    }
+    double MSE = errorSum / n;
+    cout << "Mean Squared Error (MSE): "<< MSE << endl;
+    
     return 0;
 }
