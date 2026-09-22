@@ -7,12 +7,10 @@ bool vis[1005];
 
 int main()
 {
-    //ifstream cin("sparse.txt");
-    ifstream cin("dense.txt");
-
-    int n, e;cin >> n >> e;
+    int n, e;
+    cin >> n >> e;
     vector<pair<int, int>> adj[1005];
-    vector<pair<int,int>>mst;
+    vector<pair<int, int>> mst;
 
     while (e--)
     {
@@ -70,6 +68,12 @@ int main()
             }
         }
     }
-    
+    cout << "MST Edges:\n";
+
+    for (auto x : mst)
+    {
+        cout << x.first << " - " << x.second << endl;
+    }
+
     return 0;
 }
