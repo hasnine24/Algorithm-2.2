@@ -1,0 +1,1 @@
+{"name":"Local: knapsack_memo","url":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\final_algo\\knapsack_memo.cpp","tests":[{"id":1790089346022,"input":"4 7\n1 1\n3 4\n4 5\n5 7","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\final_algo\\knapsack_memo.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: floyed","url":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\final_algo\\floyed.cpp","tests":[{"id":1790089147528,"input":"4 6\n0 1 5\n0 3 10\n1 2 3\n2 3 1\n3 2 2\n1 3 8","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Thamid Hasnine\\Desktop\\Aust 2.2\\final_algo\\floyed.cpp","group":"local","local":true}
