@@ -34,16 +34,12 @@ void printCode(Node *root, string code)
 
 int main()
 {
-    char ch[] = {'A', 'B', 'C', 'D', 'E'};
-    int freq[] = {5, 9, 12, 13, 16};
+    char ch[] = {'A', 'B', 'C', 'D', 'E','G'};
+    int freq[] = {5, 9, 12, 13, 16,17};
 
-    int n = 5;
+    int n = 6;
 
-    priority_queue<
-        pair<int, Node *>,
-        vector<pair<int, Node *>>,
-        greater<pair<int, Node *>>>
-        pq;
+    priority_queue<pair<int, Node *>,vector<pair<int, Node *>>,greater<pair<int, Node *>>>pq;
 
     // Insert all nodes
     for (int i = 0; i < n; i++)

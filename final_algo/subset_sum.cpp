@@ -30,8 +30,8 @@ void SumOfSub(int s, int k, int r)
 int main()
 {
     cin >> n;
-    w.resize(n + 2);
-    x.resize(n + 2);
+    w.resize(n + 1);
+    x.resize(n + 1);
 
     for (int i = 1; i <= n; i++)
         cin >> w[i];
@@ -41,8 +41,6 @@ int main()
     for (int i = 1; i <= n; i++)
         total += w[i];
 
-    // Sentinel value
-    w[n + 1] = INT_MAX;
     cout <<"Subsets sum " << m <<endl;
     SumOfSub(0, 1, total);
     return 0;

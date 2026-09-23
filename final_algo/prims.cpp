@@ -9,6 +9,7 @@ int main()
 {
     int n, e;
     cin >> n >> e;
+
     vector<pair<int, int>> adj[1005];
     vector<pair<int, int>> mst;
 
@@ -31,8 +32,7 @@ int main()
 
     priority_queue<pair<int, int>,
                    vector<pair<int, int>>,
-                   greater<pair<int, int>>>
-        pq;
+                   greater<pair<int, int>>> pq;
 
     weight[0] = 0;
     pq.push({0, 0});
@@ -49,10 +49,12 @@ int main()
             continue;
 
         vis[u] = true;
+
         if (par[u] != -1)
         {
             mst.push_back({par[u], u});
         }
+
         totalcost += w;
 
         for (auto x : adj[u])
@@ -68,12 +70,15 @@ int main()
             }
         }
     }
+
     cout << "MST Edges:\n";
 
     for (auto x : mst)
     {
         cout << x.first << " - " << x.second << endl;
     }
+
+    cout << "Total Cost = " << totalcost << endl;
 
     return 0;
 }

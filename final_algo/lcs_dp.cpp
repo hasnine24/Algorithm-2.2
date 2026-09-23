@@ -9,12 +9,12 @@ void printLCS(string X, int i, int j)
     if (i == 0 || j == 0)
         return;
 
-    if (b[i][j] == '\\')
+    if (b[i][j] == 'a')
     {
         printLCS(X, i - 1, j - 1);
         cout << X[i - 1];
     }
-    else if (b[i][j] == '^')
+    else if (b[i][j] == 'u')
     {
         printLCS(X, i - 1, j);
     }
@@ -48,17 +48,17 @@ int main()
             if (X[i - 1] == Y[j - 1])
             {
                 c[i][j] = c[i - 1][j - 1] + 1;
-                b[i][j] = '\\';
+                b[i][j] = 'a';
             }
             else if (c[i - 1][j] >= c[i][j - 1])
             {
                 c[i][j] = c[i - 1][j];
-                b[i][j] = '^';
+                b[i][j] = 'u';
             }
             else
             {
                 c[i][j] = c[i][j - 1];
-                b[i][j] = '<';
+                b[i][j] = 'l';
             }
         }
     }
